@@ -49,14 +49,14 @@ class Cus_reply:
 
         reply = None
         # 设置回复文本
-        if (re.match(r'^[(镜华)(XCW)(xcw)]$', msg)):
+        if (re.match(r'^[(镜华)(XCW)(xcw)]', msg)):
             reply = ['变态！叫我干嘛！爬爬爬', 
                      '呐，你叫我是想干什么呢？', 
                      '镜华累了，镜华不想说话。',
                      '作业做完了吗？我才不来帮你做作业！',
                      ][random.randint(0,3)]
 
-        elif (re.match(r'^[(小狐狸)(fbk)(FBK)]$', msg)):
+        elif (re.match(r'^[(小狐狸)(fbk)(FBK)]', msg)):
             reply = [
                      '你又在想别的女人了！',
                      'FBK斯哈斯哈！！昆卡昆卡',
@@ -64,7 +64,7 @@ class Cus_reply:
                      '本群唯一指定单推小狐狸！'
                     ][random.randint(0,3)]
 
-        elif (re.match(r'^[\S]*[(爬)(爪巴)][\S]*$', msg)):
+        elif (re.match(r'^[(爬)(爪巴)]', msg)):
             reply = '你才爪巴！'
 
         else:
