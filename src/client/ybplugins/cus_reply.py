@@ -43,6 +43,7 @@ class Cus_reply:
 
         MsgType = ctx['message_type']
         msg = ctx['raw_message']
+        UID = ctx["sender"]["user_id"]
         if MsgType == "group":
             GID = ctx['group_id']
             Role = ctx['sender']['role']
@@ -64,8 +65,11 @@ class Cus_reply:
                      '本群唯一指定单推小狐狸！',
                     ][random.randint(0,3)]
 
-        elif (re.match(r'^[(爬)(爪巴)]', msg)):
-            reply = '你才爪巴！'
+        elif (re.match(r'^[(爬)(爪巴)][\S]*', msg)):
+            reply = '[CQ:at,qq={}] 你才爪巴！'.format(UID)
+            
+        elif re.match(r'^镜华是谁[\S]?[\S]?', msg):
+            reply = '[CQ:at,qq={}] 镜华是本馆最可爱的女仆~'.format(UID)
 
         else:
             return False
