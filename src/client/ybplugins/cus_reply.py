@@ -17,6 +17,8 @@ https://github.com/richardchien/nonebot
 import asyncio
 import os
 from typing import Any, Dict, Union
+import random
+import re
 
 from aiocqhttp.api import Api
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -48,8 +50,11 @@ class Cus_reply:
         reply = None
 
         # 设置回复文本
-        if msg == 'xcw' or msg == '镜华':
-            reply = '变态！叫我干嘛！爬爬爬'
+        if (re.match(r'^(镜华)?([Xx]cw)?[\S]?$', msg)):
+            reply = ['变态！叫我干嘛！爬爬爬', 
+                     '呐，你叫我是想干什么呢？', 
+                     '镜华累了，镜华不想说话。',
+                     ][random.randint(0,2)]
         else:
             return False
 
