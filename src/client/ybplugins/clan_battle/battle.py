@@ -451,7 +451,7 @@ class ClanBattle:
         threshold = 180_0000
         if defeat:
             if health_before >= threshold:
-                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{}）\n会长，我们工会要没了！！'.format(
+                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n会长！我们行会要没了！！'.format(
                     nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
             else:
@@ -460,7 +460,7 @@ class ClanBattle:
                 )
         else:
             if damage >= threshold:
-                msg = '{}对boss造成了{:,}点伤害\n（今日第{}刀，{}）\n会长，我们工会要没了！！'.format(
+                msg = '{}对boss造成了{:,}点伤害\n（今日第{}刀，{}）\n\n会长！我们行会要没了！！'.format(
                     nik, damage, finished+1, '剩余刀' if is_continue else '完整刀'
                 )
             else:

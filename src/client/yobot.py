@@ -33,7 +33,7 @@ else:
 
 
 class Yobot:
-    Version = "就知道问版本？？？问问问？？你咋不去百度呢？"
+    Version = "[3.6.4]"
     Version_id = 199
     #  "git rev-list --count HEAD"
 
