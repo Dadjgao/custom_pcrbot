@@ -54,7 +54,16 @@ class Cus_reply:
             reply = ['变态！叫我干嘛！爬爬爬', 
                      '呐，你叫我是想干什么呢？', 
                      '镜华累了，镜华不想说话。',
-                     ][random.randint(0,2)]
+                     '作业做完了吗？我才不来帮你做作业！',
+                     ][random.randint(0,3)]
+
+        elif (re.match(r'^(小狐狸)?([Ff][Bb][Kk])?(白上吹雪)?[\S]*$', msg)):
+            reply = [
+                     '你又在想别的女人了！',
+                     'FBK斯哈斯哈！！昆卡昆卡',
+                     'DD斩首！'
+                    ][random.randint(0,2)]
+        
         else:
             return False
 
