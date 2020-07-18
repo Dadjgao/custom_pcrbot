@@ -50,7 +50,7 @@ class Cus_reply:
 
         reply = None
         # 设置回复文本
-        if (re.match(r'^[(镜华)(xcw)(XCW)][\S]?[\S]?', msg))
+        if (re.match(r'^[(镜华)(xcw)(XCW)][\S]?[\S]?', msg)):
         # if msg == '镜华' or msg == 'xcw' or msg == 'XCW':
             reply = ['变态！叫我干嘛！爬爬爬', 
                      '呐，你叫我是想干什么呢？', 
