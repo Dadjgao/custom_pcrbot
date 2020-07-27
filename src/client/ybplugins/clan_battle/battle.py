@@ -466,11 +466,11 @@ class ClanBattle:
         else:
             if damage >= threshold_h:
                 msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n会长！我们行会要没了！！\n'.format(
-                    nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
+                    nik, damage, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
             elif damage < threshold_l: 
                 msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n就这？就这就这就这？\n'.format(
-                    nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
+                    nik, damage, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
             else:
                 msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{}）'.format(
