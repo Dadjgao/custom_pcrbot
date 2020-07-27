@@ -24,7 +24,9 @@ from aiocqhttp.api import Api
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from quart import Quart
 
-import roll
+def dice():
+    return random.randint(1, 6)
+
 
 class Cus_reply:
     def __init__(self,
@@ -71,7 +73,7 @@ class Cus_reply:
             reply = '[CQ:at,qq={}] 不许斯哈~'.format(UID)
 
         elif re.match(r'^(色子|骰子)$', msg):
-            dice_res = roll.dice() 
+            dice_res = dice()
             reply = '[CQ:at,qq={}] 本次投掷结果为{}'.format(UID, dice_res)
 
         else:
