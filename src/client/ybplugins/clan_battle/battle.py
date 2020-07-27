@@ -49,6 +49,7 @@ class ClanBattle:
         '申请': 12,
         '锁定': 12,
         '取消': 13,
+        '下': 13,
         '解锁': 14,
         '面板': 15,
         '后台': 15,
@@ -1382,8 +1383,8 @@ class ClanBattle:
                 return str(e)
             _logger.info('群聊 成功 {} {} {}'.format(user_id, group_id, cmd))
             return str(boss_status)
-        elif match_num == 13:  # 取消
-            match = re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd)
+        elif match_num == 13:  # 取消, 下
+            match = re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd) or re.match(r'^下树$', cmd)
             if not match:
                 return
             b = match.group(1)
