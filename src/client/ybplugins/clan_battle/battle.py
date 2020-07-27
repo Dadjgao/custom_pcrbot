@@ -49,7 +49,6 @@ class ClanBattle:
         '申请': 12,
         '锁定': 12,
         '取消': 13,
-        '下': 13,
         '解锁': 14,
         '面板': 15,
         '后台': 15,
@@ -61,6 +60,7 @@ class ClanBattle:
         '查3': 23,
         '查4': 24,
         '查5': 25,
+        '下树': 26
     }
 
     Server = {
@@ -1383,17 +1383,15 @@ class ClanBattle:
                 return str(e)
             _logger.info('群聊 成功 {} {} {}'.format(user_id, group_id, cmd))
             return str(boss_status)
-        elif match_num == 13:  # 取消, 下
-            match = re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd) or re.match(r'^下([0]|树)$', cmd)
+        elif match_num == 13:  # 取消
+            match = re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd)
             if not match:
                 return
+            
             b = match.group(1)
             if b == '挂树':
                 boss_num = 0
                 event = b
-            elif b == '树':
-                boss_num = 0
-                event = '挂树'
             else:
                 boss_num = int(b)
                 event = f'预约{b}号boss'
@@ -1440,6 +1438,18 @@ class ClanBattle:
                     return '今日已使用SL'
                 else:
                     return '今日未使用SL'
+
+        elif match_num == 26:  # 下树
+            boss_num = 0
+            event = '挂树'
+
+            counts = self.cancel_subscribe(group_id, user_id, boss_num)
+            if counts == 0:
+                return '您没有'+event
+                _logger.info('群聊 失败 {} {} {}'.format(user_id, group_id, cmd))
+            _logger.info('群聊 成功 {} {} {}'.format(user_id, group_id, cmd))
+            return '已取消'+event
+
         elif 20 <= match_num <= 25:
             if len(cmd) != 2:
                 return
