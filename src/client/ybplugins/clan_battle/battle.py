@@ -1384,11 +1384,11 @@ class ClanBattle:
             _logger.info('群聊 成功 {} {} {}'.format(user_id, group_id, cmd))
             return str(boss_status)
         elif match_num == 13:  # 取消, 下
-            match = re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd) or re.match(r'^下树$', cmd)
+            match = re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd) or re.match(r'^下([1-5]|树)$', cmd)
             if not match:
                 return
             b = match.group(1)
-            if b == '挂树':
+            if b == '挂树' or '树':
                 boss_num = 0
                 event = b
             else:
