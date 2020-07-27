@@ -16,5 +16,6 @@ __all__ = [
     'push_news',
     'calender',
     'custom',
-    'roll'
+    'cus_reply',
+    'roll',
 ]
