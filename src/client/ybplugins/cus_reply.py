@@ -24,6 +24,7 @@ from aiocqhttp.api import Api
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from quart import Quart
 
+import roll
 
 class Cus_reply:
     def __init__(self,
@@ -50,7 +51,7 @@ class Cus_reply:
 
         reply = None
         # 设置回复文本
-        if (re.match(r'^[(镜华)(xcw)(XCW)][\S]?$', msg)):
+        if (re.match(r'^镜华[\S]?$', msg)):
         # if msg == '镜华' or msg == 'xcw' or msg == 'XCW':
             reply = ['变态！叫我干嘛！爬爬爬', 
                      '呐，你叫我是想干什么呢？', 
@@ -63,10 +64,15 @@ class Cus_reply:
             reply = '[CQ:at,qq={}] 你才爪巴！'.format(UID)
             
         elif re.match(r'^镜华是谁[\S]?[\S]?', msg):
-            reply = '[CQ:at,qq={}] 镜华是本馆最可爱的女仆~'.format(UID)
+            reply = '[CQ:at,qq={}] 镜华是本群最可爱的{}~'.format(UID, 
+                                                               ['机器人', '女仆'][random.randint(0,1)])
             
         elif re.match(r'^[\S]*斯哈斯哈[\S]*$', msg):
             reply = '[CQ:at,qq={}] 不许斯哈~'.format(UID)
+
+        elif re.match(r'^(色子|骰子)$', msg):
+            dice_res = roll.dice() 
+            reply = '[CQ:at,qq={}] 本次投掷结果为{}'.format(UID, dice_res)
 
         else:
             return False

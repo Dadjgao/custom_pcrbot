@@ -18,7 +18,6 @@ from aiocqhttp.api import Api
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from quart import Quart
 
-
 class Custom:
     def __init__(self,
                  glo_setting: Dict[str, Any],
