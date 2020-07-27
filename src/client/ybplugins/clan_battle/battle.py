@@ -448,10 +448,15 @@ class ClanBattle:
         group.save()
 
         nik = user.nickname or user.qqid
-        threshold = 180_0000
+        threshold_l = 45_0000
+        threshold_h = 180_0000
         if defeat:
-            if health_before >= threshold:
-                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n会长！我们行会要没了！！'.format(
+            if health_before >= threshold_h:
+                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n会长！我们行会要没了！！\n'.format(
+                    nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
+                )
+            elif health_before < threshold_l: 
+                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n就这？就这就这就这？\n'.format(
                     nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
             else:
@@ -459,13 +464,17 @@ class ClanBattle:
                     nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
         else:
-            if damage >= threshold:
-                msg = '{}对boss造成了{:,}点伤害\n（今日第{}刀，{}）\n\n会长！我们行会要没了！！'.format(
-                    nik, damage, finished+1, '剩余刀' if is_continue else '完整刀'
+            if damage >= threshold_h:
+                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n会长！我们行会要没了！！\n'.format(
+                    nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
+                )
+            elif damage < threshold_l: 
+                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{})\n\n就这？就这就这就这？\n'.format(
+                    nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
             else:
-                msg = '{}对boss造成了{:,}点伤害\n（今日第{}刀，{}）'.format(
-                    nik, damage, finished+1, '剩余刀' if is_continue else '完整刀'
+                msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{}）'.format(
+                    nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
         status = BossStatus(
             group.boss_cycle,
@@ -1374,7 +1383,7 @@ class ClanBattle:
             _logger.info('群聊 成功 {} {} {}'.format(user_id, group_id, cmd))
             return str(boss_status)
         elif match_num == 13:  # 取消
-            match = re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd)
+            match = (re.match(r'^取消(?:预约)?([1-5]|挂树)$', cmd) or re.match(r'^下树$', cmd))
             if not match:
                 return
             b = match.group(1)

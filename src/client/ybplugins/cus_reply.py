@@ -59,14 +59,6 @@ class Cus_reply:
                      '又想玩捉迷藏了？',
                      ][random.randint(0,4)]
 
-        elif (re.match(r'^[(小狐狸)(fbk)(FBK)][\S]?[\S]?', msg)):
-            reply = [
-                     '你又在想别的女人了！',
-                     'FBK斯哈斯哈！！昆卡昆卡',
-                     'DD斩首！',
-                     '本群唯一指定单推小狐狸！',
-                    ][random.randint(0,3)]
-
         elif (re.match(r'^(给爷)?[(爬)(爪巴)][\S]*', msg)):
             reply = '[CQ:at,qq={}] 你才爪巴！'.format(UID)
             
