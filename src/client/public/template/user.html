@@ -1,99 +1,83 @@
-<!DOCTYPE html>
-
-<head>
-    <meta name='viewport' content='width=device-width, initial-scale=1' charset="utf-8" />
-    <title>公主连结公会战面板</title>
+{% extends 'base.html' %}
+{% block title %}用户面板{% endblock %}
+{% block header %}
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.0/index.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.0/theme-chalk/index.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="{{ url_for('yobot_static', filename='yocool/js/yocool.i.js') }}"></script>
-	<link rel="stylesheet" href="{{ url_for('yobot_static', filename='yocool/css/style.css') }}">
-    <style>
-		body{
-      text-align:center;
-      margin:0;
-    }
+{% endblock %}
+{% block nav1 %}active{% endblock %}
+{% block nav5 %}active{% endblock %}
+{% block body %}
+<!--begin::Row-->
+<div class="row" id="app">
+    <div class="col-xl-4">
+        <!--begin::Stats Widget 1-->
+        <div class="card card-custom bgi-no-repeat card-border gutter-b card-stretch" style="background-position: right top; background-size: 30% auto; background-image: url(https://static.shkong.com/templates/met_11/assets/media/svg/shapes/abstract-4.svg)">
+            <!--begin::Body-->
+            <div class="card-body">
+                <a href="#" class="card-title font-weight-bold text-muted text-hover-primary font-size-h5">欢迎</a>
 
-h1 {
-  font-family: 'Lato', sans-serif;
-  font-weight:300;
-  letter-spacing: 2px;
-  font-size:48px;
-}
-p {
-  font-family: 'Lato', sans-serif;
-  letter-spacing: 1px;
-  font-size:14px;
-  color: #333333;
-}
-	</style>
-</head>
+                <div class="font-weight-bold text-success mt-9 mb-5"></div>
 
-<body>
-    <div class="header">
-
-        <div class="inner-header flex">
-            <h1>会战管理面板</h1>
+                <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">
+                    {{ user.nickname }}
+                </p>
+            </div>
+            <!--end::Body-->
         </div>
-		<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-			<defs>
-				<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-			</defs>
-			<g class="parallax">
-				<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-				<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-				<use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-				<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-			</g>
-		</svg>
-</div><br>
-    <div id="app">
-        <h4>欢迎，{{ user.nickname }}</h4>
-		<el-avatar :src="'https://q1.qlogo.cn/g?b=qq&nk=' + {{user.qqid}} + '&s=140'"></el-avatar>
-        <!--<div>上次登录：[[ from_ts({{ session.get('last_login_time') }}) ]] at {{ session.get('last_login_ipaddr') }}（[[ addr.join('') ]]）
-        </div>-->
-        {% if user.authority_group < 10 -%}
-        <el-row>
-            <a href="{{ url_for('yobot_setting') }}">
-                <el-button type="primary" style="margin: 1%;">设置项</el-button>
-            </a>
-            <a href="{{ url_for('yobot_users_managing') }}">
-                <el-button type="primary" style="margin: 1%;">用户管理</el-button>
-            </a>
-            <a href="{{ url_for('yobot_groups_managing') }}">
-                <el-button type="primary" style="margin: 1%;">群管理</el-button>
-            </a>
-        </el-row>
-        <br />
-        {%- endif %}
-        <el-row>
-            <a href="{{ url_for('yobot_user_info', qqid=user.qqid) }}">
-                <el-button type="primary" style="margin: 1%;">个人中心</el-button>
-            </a>
-            {% if not clan_groups -%}
-            <el-tooltip effect="dark" placement="bottom">
-                <div slot="content">你还没有选择默认公会<br />请在你的公会群里发送“加入公会”来设置默认公会</div>
-                <el-button type="primary" disabled>无公会</el-button>
-            </el-tooltip>
-            {%- else -%}
-				{% for group in clan_groups -%}
-				<a href="{{ url_for('yobot_clan', group_id=group['group_id']) }}">
-				<el-button type="primary">公会：{{ group['group_name'] }}</el-button>
-				</a>
-				{% endfor -%}
-            {%- endif %}
-            <a href="{{ url_for('yobot_reset_pwd') }}">
-                <el-button type="primary" style="margin: 1%;">修改密码</el-button>
-            </a>
-            <br>
-            <a href="{{ url_for('yobot_logout') }}">
-                <el-button type="danger" style="margin-top: 10%;">退出登陆</el-button>
-            </a>
-        </el-row>
+        <!--end::Stats Widget 1-->
     </div>
-</body>
+    <div class="col-xl-4">
+        <!--begin::Stats Widget 2-->
+        <div class="card card-custom bgi-no-repeat card-border gutter-b card-stretch" style="background-position: right top; background-size: 30% auto; background-image: url(https://static.shkong.com/templates/met_11/assets/media/svg/shapes/abstract-2.svg)">
+            <!--begin::Body-->
+            <div class="card-body">
+                <a href="#" class="card-title font-weight-bold text-muted text-hover-primary font-size-h5">上次登录</a>
+
+                <div class="font-weight-bold text-success mt-9 mb-5">[[ from_ts({{ session.get('last_login_time') }}) ]]</div>
+
+                <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">
+                    {{ session.get('last_login_ipaddr') }}（[[ addr.join('') ]]）
+                </p>
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Stats Widget 2-->
+    </div>
+    <div class="col-xl-4">
+        <!--begin::Stats Widget 3-->
+        <div class="card card-custom bgi-no-repeat card-border gutter-b card-stretch" style="background-position: right top; background-size: 30% auto; background-image: url(https://static.shkong.com/templates/met_11/assets/media/svg/shapes/abstract-1.svg)">
+
+            <!--begin::body-->
+            <div class="card-body">
+                <a href="#" class="card-title font-weight-bold text-muted text-hover-primary font-size-h5">工会信息</a>
+
+                <div class="font-weight-bold text-success mt-9 mb-5"></div>
+
+                <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">
+                    {% if not clan_groups -%}
+                    <div class="alert alert-custom alert-outline-2x alert-outline-danger fade show mb-5" role="alert">
+                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                        <div class="alert-text">你还没有加入任何公会<br />请在你的公会群里发送“加入公会”</div>
+                    </div>
+                    {%- else -%}
+                    {% for group in clan_groups -%}
+                    <a href="{{ url_for('yobot_clan', group_id=group['group_id']) }}">
+                        <button type="button" class="btn btn-primary">公会：{{ group['group_name'] }}</button>
+                    </a>
+                    {% endfor -%}
+                    {%- endif %}
+                </p>
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Stats Widget 3-->
+    </div>
+</div>
+<!--end::Row-->
+{% endblock %}
+{% block scripts%}
 <script>
     if (!Object.defineProperty) {
         alert('浏览器版本过低');
@@ -125,5 +109,4 @@ p {
         delimiters: ['[[', ']]'],
     })
 </script>
-
-</html>
+{% endblock %}
