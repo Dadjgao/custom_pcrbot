@@ -1,22 +1,17 @@
-{% extends '././base.html' %}
-{% block title %}出刀顺序表{% endblock %}
-{% block header %}
+<!DOCTYPE html>
+
+<head>
+    <title>总统计</title>
+    <meta name='viewport' content='width=1485' charset="utf-8" />
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.0/index.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.0/theme-chalk/index.css">
-{% endblock %}
-{% block nav3 %}active{% endblock %}
-{% block nav7 %}active{% endblock %}
-{% block body %}
-<div class="card card-custom">
-    <div class="card-header">
-        <div class="card-title">
-            <span class="card-icon"><i class="flaticon2-box-1 text-success"></i></span>
-            <h3 class="card-label">出刀顺序表</h3>
-        </div>
-    </div>
-    <div class="card-body" id="app">
+</head>
+
+<body>
+    <div id="app">
+        <el-button icon="el-icon-back" @click="location='..'"></el-button>
         <el-table :data="tableData">
             <el-table-column prop="date" label="时间" width="180" sortable>
                 <template slot-scope="scope">
@@ -36,9 +31,7 @@
 
         </el-table>
     </div>
-</div>
-{% endblock %}
-{% block scripts%}
+</body>
 <script>
     var DMG_TYPE = ['普通','剩余刀','尾刀','余尾刀']
     var app = new Vue({
@@ -96,4 +89,6 @@
         delimiters: ['[[', ']]'],
     })
 </script>
-{% endblock %}
+
+
+</html>

@@ -1,7 +1,9 @@
-{% extends '././base.html' %}
-{% block title %}数据图表{% endblock %}
-{% block header %}
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+<!DOCTYPE html>
+
+<head>
+    <title>公会战 - 数据分析</title>
+    <meta name='viewport' content='width=1485' charset="utf-8" />
+   <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.0/index.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.0/theme-chalk/index.css">
@@ -25,19 +27,14 @@
         .digit9{
           color:red;
         }
-    </style>
-{% endblock %}
-{% block nav3 %}active{% endblock %}
-{% block nav7 %}active{% endblock %}
-{% block body %}
-<div class="card card-custom">
-    <div class="card-header">
-        <div class="card-title">
-            <span class="card-icon"><i class="flaticon2-box-1 text-success"></i></span>
-            <h3 class="card-label">数据图表</h3>
-        </div>
-    </div>
-    <div id="app" style="margin: 10px" class="card-body">
+    </style>    
+</head>
+
+<body>
+    <div id="app" style="margin: 10px">
+        <el-page-header @back="location='..'" content="数据分析"></el-page-header>
+        <h1 style="text-align:center">数据分析</h1>
+        <!--以后有用-->
         <el-date-picker
           v-model="range"
           type="daterange"
@@ -60,16 +57,16 @@
                     </p>
                     <el-table v-loading="isLoading" :data="globalTableData" style="width: 100%" stripe border :default-sort = "{prop: 'sumDmg', order: 'descending'}">
                         <el-table-column prop="qqid" label="QQ号" width="125" sortable ></el-table-column>
-                        <el-table-column prop="nickname" label="昵称" width="165" sortable ></el-table-column>
-                        <el-table-column prop="count" width="100" sortable >
+                        <el-table-column prop="nickname" label="昵称" width="200" sortable ></el-table-column>
+                        <el-table-column prop="count" width="120" sortable >
                             <template slot="header" slot-scope="scope">
                                 <a>刀数</a>
                                 <el-popover placement="top" effect="light" trigger="hover">刀数=正常刀+（补偿刀+尾刀）/2<i class="el-icon-question" slot="reference"></i></el-popover>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="countTail" label="尾刀" width="100" sortable ></el-table-column>
-                        <el-table-column prop="countContinue" label="补偿刀" width="100" sortable ></el-table-column>
-                        <el-table-column prop="avgDmg" width="180" sortable sort-by="avgDmg" >
+                        <el-table-column prop="countTail" label="尾刀" width="120" sortable ></el-table-column>
+                        <el-table-column prop="countContinue" label="补偿刀" width="120" sortable ></el-table-column>
+                        <el-table-column prop="avgDmg" width="270" sortable sort-by="avgDmg" >
                             <template slot="header" slot-scope="scope">
                                 <a>刀均伤害</a>
                                 <el-popover v-if="!containTailAndContinue" placement="top" effect="light" trigger="hover">当前刀均伤害未计入尾刀和补偿刀<i class="el-icon-question" slot="reference"></i></el-popover>
@@ -79,7 +76,7 @@
                                 <a :class='"digit" + scope.row.avgDmg.toString().length'>[[scope.row.avgDmg]]</a>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="sumDmg" label="总伤害" width="180" sortable sort-by="sumDmg" >
+                        <el-table-column prop="sumDmg" label="总伤害" width="270" sortable sort-by="sumDmg" >
                             <template slot-scope="scope">
                                 <a :class='"digit" + scope.row.sumDmg.toString().length'>[[scope.row.sumDmg]]</a>
                             </template>
@@ -168,10 +165,13 @@
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
-{% block scripts%}
+    
+    
+</body>
+
 <script>var csrfToken = "{{ session['csrf_token'] }}"; var qqid = "{{ session['yobot_user'] }}"</script>
 <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts.min.js"></script>
 <script src="{{ url_for('yobot_static', filename='clan/statistics/statistics2.js') }}"></script>
-{% endblock %}
+
+
+</html>
