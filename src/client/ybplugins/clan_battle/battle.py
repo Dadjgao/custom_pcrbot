@@ -474,7 +474,7 @@ class ClanBattle:
                 )
             else:
                 msg = '{}对boss造成了{:,}点伤害，击败了boss\n（今日第{}刀，{}）'.format(
-                    nik, health_before, finished+1, '尾余刀' if is_continue else '收尾刀'
+                    nik, damage, finished+1, '尾余刀' if is_continue else '收尾刀'
                 )
         status = BossStatus(
             group.boss_cycle,
