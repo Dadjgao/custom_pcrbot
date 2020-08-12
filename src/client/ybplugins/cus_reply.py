@@ -42,7 +42,7 @@ def russian_roll(in_roll_user_UID, msgs_after_begin, flag, UID=None, in_roll = 5
         
     
     elif msgs_after_begin >= 20:  # 消息数量超过结束
-        msg = '[CQ:at,qq={}] 你马没了'.format(in_roll_user_UID[random.randint(0, len(in_roll_user_UID))]
+        msg = '[CQ:at,qq={}] 你马没了'.format(in_roll_user_UID[random.randint(0, len(in_roll_user_UID))])
 
         in_roll_user_UID.clear()
         msgs_after_begin = 0
